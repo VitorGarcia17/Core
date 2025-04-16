@@ -449,14 +449,47 @@ void tst_ft_strnstr()
 void tst_ft_strlcpy()
 {
 	printf("%s\n", "########### BEGIN TESTE ft_strlcpy");
-	char str1[] = "Ruthless is merci upon yourself ";
-	char str2[] = "";
-	//char str3[] = "";
+
+	int nbr = 5;
+
+	char v_str1[42] = "Poseidon";
+	char v_str2[32] = "Ruthless is merci upon yourself";
 	
-	//printf("ft_strlcpy(%s, %s, 5) %s <\n", str1, str2, ft_strlcpy(str1, str2, 5));
-	printf("strlcpy(%s, %s, 5) %s <\n", str1, str2, strlcpy(str1, str2, 5));
+	printf("ft_strlcpy(%s, %s, %i) ", v_str1, v_str2, nbr);
+	printf("%zu <\n", ft_strlcpy(v_str1, v_str2, nbr));
+	printf("ft_strlcpy DST: %s <\n", v_str1);
+
+	char str1[42] = "Poseidon";
+	char str2[32] = "Ruthless is merci upon yourself";
+
+	printf("strlcpy(%s, %s, %i) ", str1, str2, nbr);
+	printf("%zu <\n", strlcpy(str1, str2, nbr));
+	printf("strlcpy DST: %s <\n", str1);
 
 	printf("%s\n", "########### END TESTE ft_strlcpy");
+}
+
+void tst_ft_strlcat()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_strlcat");
+
+	int nbr = 22;
+
+	char v_str1[42] = "Poseidon";
+	char v_str2[32] = "Ruthless is merci upon yourself";
+	
+	printf("ft_strlcat(%s, %s, %i) ", v_str1, v_str2, nbr);
+	printf("%zu <\n", ft_strlcat(v_str1, v_str2, nbr));
+	printf("ft_strlcat DST: %s <\n", v_str1);
+
+	char str1[42] = "Poseidon";
+	char str2[32] = "Ruthless is merci upon yourself";
+
+	printf("strlcat(%s, %s, %i) ", str1, str2, nbr);
+	printf("%zu <\n", strlcat(str1, str2, nbr));
+	printf("strlcat DST: %s <\n", str1);
+
+	printf("%s\n", "########### END TESTE ft_strlcat");
 }
 
 int main(void)
@@ -477,11 +510,12 @@ int main(void)
 	// tst_ft_strchr();
 	// tst_ft_strnstr();
 	// tst_ft_strncmp();
+	// tst_ft_strlcpy();
+	// tst_ft_strlcat();
 	
 	// tst_ft_memcpy();
 	// tst_ft_memmove();
 	// tst_ft_memchr();
 
-	tst_ft_strlcpy();
 	return 0;
 }
