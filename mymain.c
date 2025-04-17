@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mymain.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vipinhei <vipinhei@student.42porto.co      +#+  +:+       +#+        */
+/*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:57:37 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/08 14:57:39 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:28:40 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,14 +212,17 @@ void tst_ft_bzero()
 void tst_ft_memcpy()
 {
 	printf("%s\n", "########### BEGIN TESTE ft_memcpy");
+	int	nbr = 5;
 	char src[] = "0123456789";
-	char dest1[10] = "";
-	char dest2[10] = "";
+	char dst2[10] = "";
+	char dst1[10] = "";
 
-	memcpy(dest1, src, 5);
-	printf("memcpy: %s <\n", dest1);
-	ft_memcpy(dest2, src, 5);
-	printf("ft_memcpy: %s <\n", dest2);
+	printf("memcpy(%s, %s, %i) <\n", dst1, src, nbr);
+	memcpy(dst1, src, nbr);
+	printf("memcpy dst %s <\n", dst1);
+	printf("ft_memcpy(%s, %s, %i) <\n", dst2, src, nbr);
+	ft_memcpy(dst2, src, 5);
+	printf("ft_memcpy dst %s <\n", dst2);
 
 	printf("%s\n", "########### END TESTE ft_memcpy");
 }
@@ -227,14 +230,17 @@ void tst_ft_memcpy()
 void tst_ft_memmove()
 {
 	printf("%s\n", "########### BEGIN TESTE ft_memmove");
+	int	nbr = 5;
 	char src[] = "0123456789";
-	char dest1[10] = "";
-	char dest2[10] = "";
+	char dst2[10] = "";
+	char dst1[10] = "";
 
-	memmove(dest1, src, 5);
-	printf("memmove: %s <\n", dest1);
-	ft_memmove(dest2, src, 5);
-	printf("ft_memmove: %s <\n", dest2);
+	printf("memmove(%s, %s, %i) <\n", dst1, src, nbr);
+	memmove(dst1, src, nbr);
+	printf("memmove dst %s <\n", dst1);
+	printf("ft_memmove(%s, %s, %i) <\n", dst2, src, nbr);
+	ft_memmove(dst2, src, 5);
+	printf("ft_memmove dst %s <\n", dst2);
 
 	printf("%s\n", "########### END TESTE ft_memmove");
 }
@@ -262,10 +268,12 @@ void tst_ft_strncmp()
 void tst_ft_memchr()
 {
 	printf("%s\n", "########### BEGIN TESTE ft_memchr");
-	char s[] = "Escape is not alowed";
+	char str[] = "Escape is not alowed";
+	char c = 'p';
+	int nbr = 8;
 
-	printf("memchr (%s x a x 8): %p <\n", s, memchr(s, 'a', 8));
-	printf("ft_memchr (%s x a x 8): %p <\n", s, ft_memchr(s, 'a', 8));
+	printf("memchr(%s, %c, %i) %s <\n", str, c, nbr, (char *)memchr(str, c, nbr));
+	printf("ft_memchr(%s, %c, %i) %s <\n", str, c, nbr, (char *)ft_memchr(str, c, nbr));
 
 	printf("%s\n", "########### END TESTE ft_memchr");
 }
@@ -492,6 +500,25 @@ void tst_ft_strlcat()
 	printf("%s\n", "########### END TESTE ft_strlcat");
 }
 
+void tst_ft_calloc()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_calloc");
+	int num = 31;
+	int size = 1;
+
+	char *str = calloc(num, size);
+	memmove(str, "Ruthless is merci upon yourself", 31);
+	printf("calloc(%i, %i) %s <\n", num, size, str);
+	free(str);
+	
+	char *str = ft_calloc(num, size);
+	memmove(str, "Ruthless is merci upon yourself", 31);
+	printf("ft_calloc(%i, %i) %s <\n", num, size, str);
+	free(str);
+
+	printf("%s\n", "########### END TESTE ft_calloc");
+}
+
 int main(void)
 {
 	// tst_ft_isalpha();
@@ -512,10 +539,11 @@ int main(void)
 	// tst_ft_strncmp();
 	// tst_ft_strlcpy();
 	// tst_ft_strlcat();
-	
 	// tst_ft_memcpy();
 	// tst_ft_memmove();
 	// tst_ft_memchr();
+
+	tst_ft_calloc();
 
 	return 0;
 }
