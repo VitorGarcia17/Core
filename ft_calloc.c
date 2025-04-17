@@ -6,7 +6,7 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 14:44:32 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/17 15:54:22 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:09:47 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	if(nmemb == 0 || size == 0 || nmemb > SIZE_MAX / size)
+	void *mem_temp;
+	
+	if(nmemb == 0 || size == 0 || nmemb > (SIZE_MAX / size))
 		return (NULL);
 	
-	malloc(nmemb * size);
-	return (NULL);
+	mem_temp = malloc(nmemb * size);
+	ft_bzero(mem_temp, nmemb * size);
+	
+	return (mem_temp);
 }

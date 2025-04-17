@@ -6,7 +6,7 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:57:37 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/17 15:28:40 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:05:21 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -507,14 +507,16 @@ void tst_ft_calloc()
 	int size = 1;
 
 	char *str = calloc(num, size);
+	printf("calloc(%i, %i) %s <\n", num, size, str);
 	memmove(str, "Ruthless is merci upon yourself", 31);
 	printf("calloc(%i, %i) %s <\n", num, size, str);
 	free(str);
 	
-	char *str = ft_calloc(num, size);
-	memmove(str, "Ruthless is merci upon yourself", 31);
-	printf("ft_calloc(%i, %i) %s <\n", num, size, str);
-	free(str);
+	char *str2 = ft_calloc(num, size);
+	printf("ft_calloc(%i, %i) %s <\n", num, size, str2);
+	memmove(str2, "Ruthless is merci upon yourself", 31);
+	printf("ft_calloc(%i, %i) %s <\n", num, size, str2);
+	free(str2);
 
 	printf("%s\n", "########### END TESTE ft_calloc");
 }
