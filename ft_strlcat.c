@@ -6,7 +6,7 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 16:01:49 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/09 16:01:50 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:07:42 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		i++;
 	}
 	dst[l_dst + i] = '\0';
-
-	if(l_dst > size)
+	if (l_dst > size)
 		return (size + l_src);
 	else
 		return (l_dst + l_src);

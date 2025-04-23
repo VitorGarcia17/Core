@@ -6,7 +6,7 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:45:56 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/09 13:45:57 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:01:49 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t i;
+	size_t	i;
 	char	*str;
 
 	str = (char *)s;

@@ -6,7 +6,7 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 16:03:17 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/09 16:03:19 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:08:58 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	s_len;
-	char *str;
+	int		s_len;
+	char	*str;
 
 	str = (char *) s;
 	s_len = ft_strlen(s);

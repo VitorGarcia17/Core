@@ -6,7 +6,7 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:57:37 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/17 18:05:21 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/04/23 15:47:08 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -461,14 +461,14 @@ void tst_ft_strlcpy()
 	int nbr = 5;
 
 	char v_str1[42] = "Poseidon";
-	char v_str2[32] = "Ruthless is merci upon yourself";
+	char v_str2[32] = "Ruthless is mercy upon yourself";
 	
 	printf("ft_strlcpy(%s, %s, %i) ", v_str1, v_str2, nbr);
 	printf("%zu <\n", ft_strlcpy(v_str1, v_str2, nbr));
 	printf("ft_strlcpy DST: %s <\n", v_str1);
 
 	char str1[42] = "Poseidon";
-	char str2[32] = "Ruthless is merci upon yourself";
+	char str2[32] = "Ruthless is mercy upon yourself";
 
 	printf("strlcpy(%s, %s, %i) ", str1, str2, nbr);
 	printf("%zu <\n", strlcpy(str1, str2, nbr));
@@ -484,14 +484,14 @@ void tst_ft_strlcat()
 	int nbr = 22;
 
 	char v_str1[42] = "Poseidon";
-	char v_str2[32] = "Ruthless is merci upon yourself";
+	char v_str2[32] = "Ruthless is mercy upon yourself";
 	
 	printf("ft_strlcat(%s, %s, %i) ", v_str1, v_str2, nbr);
 	printf("%zu <\n", ft_strlcat(v_str1, v_str2, nbr));
 	printf("ft_strlcat DST: %s <\n", v_str1);
 
 	char str1[42] = "Poseidon";
-	char str2[32] = "Ruthless is merci upon yourself";
+	char str2[32] = "Ruthless is mercy upon yourself";
 
 	printf("strlcat(%s, %s, %i) ", str1, str2, nbr);
 	printf("%zu <\n", strlcat(str1, str2, nbr));
@@ -508,17 +508,119 @@ void tst_ft_calloc()
 
 	char *str = calloc(num, size);
 	printf("calloc(%i, %i) %s <\n", num, size, str);
-	memmove(str, "Ruthless is merci upon yourself", 31);
+	memmove(str, "Ruthless is mercy upon yourself", 31);
 	printf("calloc(%i, %i) %s <\n", num, size, str);
 	free(str);
 	
 	char *str2 = ft_calloc(num, size);
 	printf("ft_calloc(%i, %i) %s <\n", num, size, str2);
-	memmove(str2, "Ruthless is merci upon yourself", 31);
+	memmove(str2, "Ruthless is mercy upon yourself", 31);
 	printf("ft_calloc(%i, %i) %s <\n", num, size, str2);
 	free(str2);
 
 	printf("%s\n", "########### END TESTE ft_calloc");
+}
+
+void tst_ft_strdup()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_strdup");
+	char str[] = "Ruthless is mercy upon yourself";
+	char *str2;
+
+	str2 = strdup(str);
+	printf("strdup(%s) %s <\n", str, str2);
+	free(str2);
+
+	str2 = ft_strdup(str);
+	printf("ft_strdup(%s) %s <\n", str, str2);
+	free(str2);
+
+	printf("%s\n", "########### END TESTE ft_strdup");
+}
+
+void tst_ft_substr()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_substr");
+	char	str[] = "Ruthless is mercy upon yourself";
+	char	*str2;
+	int		start = 13;
+	size_t	len = 13;
+	
+	str2 = ft_substr(str, start, len);
+	printf("ft_substr(%s, %i, %zu) %s <\n", str, start, len, str2);
+	free(str2);
+
+	printf("%s\n", "########### END TESTE ft_substr");
+}
+
+void tst_ft_strjoin()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_strjoin");
+	char	str1[] = "Ruthless is mercy upon yourself";
+	char	str2[] = " - Poseidon";
+	char	*str3;
+	
+	str3 = ft_strjoin(str1, str2);
+	printf("ft_strjoin(\"%s\", \"%s\") \"%s\" <\n", str1, str2, str3);
+	free(str3);
+
+	printf("%s\n", "########### END TESTE ft_strjoin");
+}
+
+void tst_ft_strtrim()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_strtrim");
+	char	str1[] = "Ruthless is mercy upon yourself, Ruthless";
+	char	str2[] = "Ruthless";
+	char	*str3;
+	
+	str3 = ft_strtrim(str1, str2);
+	printf("ft_strtrim(\"%s\", \"%s\") \"%s\" <\n", str1, str2, str3);
+	free(str3);
+
+	printf("%s\n", "########### END TESTE ft_strtrim");
+}
+
+void tst_ft_split()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_split");
+	char	str1[] = "   Ruthless  is mercy  upon yourself  ";
+	char	c = ' ';
+	char	**str2;
+	int		i = 0;
+	
+	str2 = ft_split(str1, c);
+	printf("ft_split(\"%s\", \"%c\") ", str1, c);
+	while (str2[i])
+	{
+		printf("\"%s\" ", str2[i]);
+		i++;
+	}
+	printf(" <\n");
+	free(str2);
+
+	printf("%s\n", "########### END TESTE ft_split");
+}
+
+void tst_ft_itoa()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_itoa");
+	int		zero = 0;
+	int		negative_ten = -10;
+	int		almost_10k = 9999;
+	char	*str;
+	
+	str = ft_itoa(zero);
+	printf("ft_itoa(%i) %s <\n", zero, str);
+	free(str);
+	str = ft_itoa(negative_ten);
+	printf("ft_itoa(%i) %s <\n", negative_ten, str);
+	free(str);
+	str = ft_itoa(almost_10k);
+	printf("ft_itoa(%i) %s <\n", almost_10k, str);
+	free(str);
+
+	printf("%s\n", "########### END TESTE ft_itoa");
 }
 
 int main(void)
@@ -544,8 +646,14 @@ int main(void)
 	// tst_ft_memcpy();
 	// tst_ft_memmove();
 	// tst_ft_memchr();
+	// tst_ft_calloc();
+	// tst_ft_strdup();
 
-	tst_ft_calloc();
+	// tst_ft_substr();
+	// tst_ft_strjoin();
+	// tst_ft_strtrim();
+	// tst_ft_split();
+	tst_ft_itoa();
 
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 16:03:38 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/09 16:03:39 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:06:03 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	i = 0;
 	while (i < n && str[i] != '\0')
 	{
-		if(cc == str[i])
+		if (cc == str[i])
 			return ((char *) str + i);
 		i++;
 	}
