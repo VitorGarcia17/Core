@@ -6,7 +6,7 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:57:37 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/23 15:47:08 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/04/25 18:48:14 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <string.h>
 #include <strings.h>
 #include <ctype.h>
-#include <bsd/string.h>
+//#include <bsd/string.h>
 
 void tst_ft_isalpha()
 {
@@ -449,7 +449,7 @@ void tst_ft_strnstr()
 	char str2[] = "uth";
 	
 	printf("ft_strnstr(%s, %s, 5) %s <\n", str1, str2, ft_strnstr(str1, str2, 5));
-	printf("strnstr(%s, %s, 5) %s <\n", str1, str2, strnstr(str1, str2, 5));
+	//printf("strnstr(%s, %s, 5) %s <\n", str1, str2, strnstr(str1, str2, 5));
 
 	printf("%s\n", "########### END TESTE ft_strnstr");
 }
@@ -623,6 +623,19 @@ void tst_ft_itoa()
 	printf("%s\n", "########### END TESTE ft_itoa");
 }
 
+void tst_ft_putchar_fd()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_putchar_fd");
+	int		i = 1;
+	char	c = 'v';
+	
+	printf("ft_putchar_fd(%c, %i) <\n", c, i);
+	ft_putchar_fd(c, i);
+	printf(" <\n");
+
+	printf("%s\n", "########### END TESTE ft_putchar_fd");
+}
+
 int main(void)
 {
 	// tst_ft_isalpha();
@@ -653,7 +666,8 @@ int main(void)
 	// tst_ft_strjoin();
 	// tst_ft_strtrim();
 	// tst_ft_split();
-	tst_ft_itoa();
+	// tst_ft_itoa();
+	tst_ft_putchar_fd();
 
 	return 0;
 }
