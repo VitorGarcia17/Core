@@ -6,7 +6,7 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:57:37 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/25 18:48:14 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/04/30 18:29:20 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,42 @@
 #include <strings.h>
 #include <ctype.h>
 //#include <bsd/string.h>
+
+
+char put_a_plus(unsigned int i, char c)
+{
+	if ((c >= 65 && c < 90) || (c >= 97 && c < 122))
+		return (c+1);
+	if (c == 90)
+		return (65);
+	if (c == 122)
+		return (97);
+	return (33 + ((c+i) % (126 - 33 + 1)));
+}
+
+char put_a_minus(unsigned int i, char c)
+{
+	if ((c > 65 && c <= 90) || (c > 97 && c <= 122))
+		return (c-1);
+	if (c == 65)
+		return (90);
+	if (c == 97)
+		return (122);
+	return (33 + ((c-i) % (126 - 33 + 1)));
+}
+
+void put_a_change(unsigned int i, char *c)
+{
+	if (((*c) >= 65 && (*c) < 90) || ((*c) >= 97 && (*c) < 122))
+		(*c) = (*c) + 1;
+	else if ((*c) == 90)
+		(*c) = 65;
+	else if ((*c) == 122)
+		(*c) = 97;
+	else
+		(*c) = 33 + (((*c)+i) % (126 - 33 + 1));
+}
+
 
 void tst_ft_isalpha()
 {
@@ -636,6 +672,89 @@ void tst_ft_putchar_fd()
 	printf("%s\n", "########### END TESTE ft_putchar_fd");
 }
 
+void tst_ft_putstr_fd()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_putstr_fd");
+	int		i = 1;
+	char	str[] = "Escape is not alowed";
+	
+	printf("ft_putstr_fd(%s, %i) <\n", str, i);
+	ft_putstr_fd(str, i);
+	printf(" <\n");
+
+	printf("%s\n", "########### END TESTE ft_putstr_fd");
+}
+
+void tst_ft_putnbr_fd()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_putnbr_fd");
+	int		i = 1;
+	int	nbr1 = 12345;
+	int	nbr2 = -1234;
+	
+	printf("ft_putnbr_fd(%i, %i) <\n", nbr1, i);
+	ft_putnbr_fd(nbr1, i);
+	printf(" <\n");
+	printf("ft_putnbr_fd(%i, %i) <\n", nbr2, i);
+	ft_putnbr_fd(nbr2, i);
+	printf(" <\n");
+
+	printf("%s\n", "########### END TESTE ft_putnbr_fd");
+}
+
+void tst_ft_putendl_fd()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_putendl_fd");
+	int		i = 1;
+	char	str[] = "Escape is not alowed";
+	
+	printf("ft_putendl_fd(%s, %i) <\n", str, i);
+	ft_putendl_fd(str, i);
+	printf("<\n");
+
+	printf("%s\n", "########### END TESTE ft_putendl_fd");
+}
+
+void tst_ft_strmapi()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_strmapi");
+	char	str1[] = "Ruthless is mercy upon yourself";
+	char	*str2;
+	
+	str2 = ft_strmapi(str1, put_a_plus);
+	printf("ft_strmapi(%s, put_a_plus) %s <\n", str1, str2);
+	free(str2);
+	str2 = ft_strmapi(str1, put_a_minus);
+	printf("ft_strmapi(%s, put_a_minus) %s <\n", str1, str2);
+	free(str2);
+
+	printf("%s\n", "########### END TESTE ft_strmapi");
+}
+
+void tst_ft_striteri()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_striteri");
+	char	str[] = "Ruthless is mercy upon yourself";
+	
+	printf("ft_striteri(%s, put_a_change) ", str);
+	ft_striteri(str, put_a_change);
+	printf("\n%s <\n", str);
+
+	printf("%s\n", "########### END TESTE ft_striteri");
+}
+
+void tst_ft_lstnew()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_lstnew");
+	char	str[] = "Ruthless is mercy upon yourself";
+	t_list	*new_list;
+
+	new_list = ft_lstnew(str);
+
+	printf("ft_lstnew(%s) %s <\n", str, new_list->content);
+
+	printf("%s\n", "########### END TESTE ft_lstnew");
+}
 int main(void)
 {
 	// tst_ft_isalpha();
@@ -667,7 +786,14 @@ int main(void)
 	// tst_ft_strtrim();
 	// tst_ft_split();
 	// tst_ft_itoa();
-	tst_ft_putchar_fd();
+	// tst_ft_putchar_fd();
+	// tst_ft_putstr_fd();
+	// tst_ft_putnbr_fd();
+	// tst_ft_putendl_fd();
+	// tst_ft_strmapi();
+	// tst_ft_striteri();
+
+	tst_ft_lstnew();
 
 	return 0;
 }
