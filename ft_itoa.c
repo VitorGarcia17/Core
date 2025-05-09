@@ -6,15 +6,21 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:03:58 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/23 15:56:31 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/05/09 18:09:34 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_d(int n)
+// Convert int to char
+// positive_max = 2147483647;
+// positive_ten = 10;
+// zero = 0;
+// negative_ten = -10;
+// negative_max = -2147483648;
+static int	ft_count_d(long n)
 {
-	int	nbr;
+	long	nbr;
 	int	i;
 
 	nbr = n;
@@ -27,7 +33,7 @@ static int	ft_count_d(int n)
 	return (i);
 }
 
-static int	ft_is_negative(int *n, int *i)
+static int	ft_is_negative(long *n, int *i)
 {
 	if (*n < 0)
 	{
@@ -38,16 +44,17 @@ static int	ft_is_negative(int *n, int *i)
 	return (0);
 }
 
-char	*ft_itoa(int n)
+
+char	*ft_itoaa(long n)
 {
 	int		i;
 	char	*str;
 	int		negative;
-
+	
 	i = 0;
 	negative = ft_is_negative(&n, &i);
 	i += ft_count_d(n);
-	str = (char *) malloc(i * sizeof(char) + 1);
+	str = (char *) malloc((i + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	str[i] = '\0';
@@ -63,6 +70,16 @@ char	*ft_itoa(int n)
 		str[0] = '-';
 	}
 	else
-		str[0] = ((char) n + 48);
+	str[0] = ((char) n + 48);
 	return (str);
+}
+
+char	*ft_itoa(int n)
+{
+	long new_n;
+	char	*str;
+
+	new_n = n;
+	str = ft_itoaa(new_n);
+	return(str);
 }

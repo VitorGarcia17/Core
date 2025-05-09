@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 14:16:22 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/05/08 16:52:09 by vipinhei         ###   ########.fr       */
+/*   Created: 2025/05/06 17:24:50 by vipinhei          #+#    #+#             */
+/*   Updated: 2025/05/08 15:53:53 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Fill memory with a constant byte
-void	*ft_memset(void *s, int c, size_t n)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	size_t	i;
-	char	*str;
+	t_list	*iter_list;
 
-	str = (char *)s;
-	i = 0;
-	while (i < n)
+	iter_list = lst;
+	while (iter_list != NULL)
 	{
-		str[i] = c;
-		i++;
+		f(iter_list->content);
+		iter_list = iter_list->next;
 	}
-	return (str);
 }

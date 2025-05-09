@@ -6,12 +6,13 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 16:04:39 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/09 16:04:40 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:52:06 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+// Convert char into int
 int	ft_atoi(const char *nptr)
 {
 	int	i;

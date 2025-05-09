@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 14:16:22 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/05/08 16:52:09 by vipinhei         ###   ########.fr       */
+/*   Created: 2025/05/06 14:12:35 by vipinhei          #+#    #+#             */
+/*   Updated: 2025/05/08 16:59:50 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Fill memory with a constant byte
-void	*ft_memset(void *s, int c, size_t n)
+// Add at star of list a new node
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	size_t	i;
-	char	*str;
-
-	str = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = c;
-		i++;
-	}
-	return (str);
+	new->next = *lst;
+	*lst = new;
 }

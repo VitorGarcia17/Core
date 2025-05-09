@@ -6,12 +6,13 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 16:04:02 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/09 16:04:03 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/05/08 17:11:26 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+// Compare memory and return a 0 if they are equal
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t				i;

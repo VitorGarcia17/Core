@@ -6,7 +6,7 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:57:37 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/30 18:29:20 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/05/09 18:49:25 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <string.h>
 #include <strings.h>
 #include <ctype.h>
-//#include <bsd/string.h>
+#include <bsd/string.h>
 
 
 char put_a_plus(unsigned int i, char c)
@@ -53,6 +53,17 @@ void put_a_change(unsigned int i, char *c)
 		(*c) = 33 + (((*c)+i) % (126 - 33 + 1));
 }
 
+void	print_list(t_list **lst)
+{
+	t_list	*all_list = *lst;
+	printf("all_list = ");
+	while (all_list->next != NULL)
+	{
+		printf("[%s], ", (char *)all_list->content);
+		all_list = all_list->next;
+	}
+	printf("[%s] < \n", (char *)all_list->content);
+}
 
 void tst_ft_isalpha()
 {
@@ -482,10 +493,13 @@ void tst_ft_strnstr()
 {
 	printf("%s\n", "########### BEGIN TESTE ft_strnstr");
 	char str1[] = "Ruthless is merci upon yourself (mercy)";
-	char str2[] = "uth";
+	char str2[] = "merci";
+	// char	str1[] = "merci";
+	// char	str2[] = "merci";
+	int i = 5;
 	
-	printf("ft_strnstr(%s, %s, 5) %s <\n", str1, str2, ft_strnstr(str1, str2, 5));
-	//printf("strnstr(%s, %s, 5) %s <\n", str1, str2, strnstr(str1, str2, 5));
+	printf("ft_strnstr(%s, %s, %i) %s <\n", str1, str2, i, ft_strnstr(str1, str2, i));
+	printf("strnstr(%s, %s, %i) %s <\n", str1, str2, i, strnstr(str1, str2, i));
 
 	printf("%s\n", "########### END TESTE ft_strnstr");
 }
@@ -641,19 +655,27 @@ void tst_ft_split()
 void tst_ft_itoa()
 {
 	printf("%s\n", "########### BEGIN TESTE ft_itoa");
+	int		positive_max = 2147483647;
+	int		positive_ten = 10;
 	int		zero = 0;
 	int		negative_ten = -10;
-	int		almost_10k = 9999;
+	int		negative_max = -2147483648;
 	char	*str;
 	
+	str = ft_itoa(positive_max);
+	printf("ft_itoa(%i) %s <\n", positive_max, str);
+	free(str);
+	str = ft_itoa(positive_ten);
+	printf("ft_itoa(%i) %s <\n", positive_ten, str);
+	free(str);
 	str = ft_itoa(zero);
 	printf("ft_itoa(%i) %s <\n", zero, str);
 	free(str);
 	str = ft_itoa(negative_ten);
 	printf("ft_itoa(%i) %s <\n", negative_ten, str);
 	free(str);
-	str = ft_itoa(almost_10k);
-	printf("ft_itoa(%i) %s <\n", almost_10k, str);
+	str = ft_itoa(negative_max);
+	printf("ft_itoa(%i) %s <\n", negative_max, str);
 	free(str);
 
 	printf("%s\n", "########### END TESTE ft_itoa");
@@ -738,7 +760,7 @@ void tst_ft_striteri()
 	
 	printf("ft_striteri(%s, put_a_change) ", str);
 	ft_striteri(str, put_a_change);
-	printf("\n%s <\n", str);
+	printf("%s <\n", str);
 
 	printf("%s\n", "########### END TESTE ft_striteri");
 }
@@ -751,12 +773,184 @@ void tst_ft_lstnew()
 
 	new_list = ft_lstnew(str);
 
-	printf("ft_lstnew(%s) %s <\n", str, new_list->content);
+	printf("ft_lstnew(%s) %s <\n", str, (char *)new_list->content);
 
 	printf("%s\n", "########### END TESTE ft_lstnew");
 }
+
+void tst_ft_lstadd_front()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_lstadd_front");
+	char	str1[] = "Ruthless";
+	char	str2[] = "is";
+	char	str3[] = "mercy";
+	t_list	*all_list;
+	t_list	*new_list;
+
+	all_list = ft_lstnew(str3);
+	printf("all_list = ft_lstnew(%s) <\n", str3);
+	new_list = ft_lstnew(str2);
+	printf("new_list = ft_lstnew(%s) <\n", str2);
+	ft_lstadd_front(&all_list, new_list);
+	printf("ft_lstadd_front(&all_list, new_list) <\n");
+	new_list = ft_lstnew(str1);
+	printf("new_list = ft_lstnew(%s) <\n", str1);
+	ft_lstadd_front(&all_list, new_list);
+	printf("ft_lstadd_front(&all_list, new_list) <\n");
+	print_list(&all_list);
+
+	printf("%s\n", "########### END TESTE ft_lstadd_front");
+}
+
+void tst_ft_lstsize()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_lstsize");
+	char	str1[] = "Ruthless";
+	char	str2[] = "is";
+	char	str3[] = "mercy";
+	t_list	*all_list;
+	t_list	*new_list;
+	int		i = 0;
+
+	all_list = ft_lstnew(str3);
+	printf("all_list = ft_lstnew(%s) <\n", str3);
+	new_list = ft_lstnew(str2);
+	printf("new_list = ft_lstnew(%s) <\n", str2);
+	ft_lstadd_front(&all_list, new_list);
+	printf("ft_lstadd_front(&all_list, new_list) <\n");
+	new_list = ft_lstnew(str1);
+	printf("new_list = ft_lstnew(%s) <\n", str1);
+	ft_lstadd_front(&all_list, new_list);
+	printf("ft_lstadd_front(&all_list, new_list) <\n");
+	print_list(&all_list);
+	printf("ft_lstsize(all_list) %i <\n", ft_lstsize(all_list));
+
+	printf("%s\n", "########### END TESTE ft_lstsize");
+}
+
+void tst_ft_lstadd_back()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_lstadd_back");
+	char	str1[] = "Ruthless";
+	char	str2[] = "is";
+	char	str3[] = "mercy";
+	t_list	*all_list;
+	t_list	*new_list;
+
+	all_list = ft_lstnew(str1);
+	printf("all_list = ft_lstnew(%s) <\n", str1);
+	new_list = ft_lstnew(str2);
+	printf("new_list = ft_lstnew(%s) <\n", str2);
+	ft_lstadd_back(&all_list, new_list);
+	printf("ft_lstadd_back(&all_list, new_list) <\n");
+	new_list = ft_lstnew(str3);
+	printf("new_list = ft_lstnew(%s) <\n", str3);
+	ft_lstadd_back(&all_list, new_list);
+	printf("ft_lstadd_back(&all_list, new_list) <\n");
+	print_list(&all_list);
+
+	printf("%s\n", "########### END TESTE ft_lstadd_back");
+}
+
+void tst_ft_lstdelone()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_lstdelone");
+	char	str1[] = "Ruthless";
+	char	str2[] = "is";
+	char	str3[] = "mercy";
+	t_list	*all_list;
+	t_list	*new_list;
+
+	all_list = ft_lstnew(str1);
+	printf("all_list = ft_lstnew(%s) <\n", str1);
+	new_list = ft_lstnew(str2);
+	printf("new_list = ft_lstnew(%s) <\n", str2);
+	ft_lstadd_back(&all_list, new_list);
+	printf("ft_lstadd_back(&all_list, new_list) <\n");
+	new_list = ft_lstnew(str3);
+	printf("new_list = ft_lstnew(%s) <\n", str3);
+	ft_lstadd_back(&all_list, new_list);
+	printf("ft_lstadd_back(&all_list, new_list) <\n");
+	print_list(&all_list);
+
+	printf("%s\n", "########### END TESTE ft_lstdelone");
+}
+
+void tst_ft_lstclear()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_lstclear");
+	char	str1[] = "Ruthless";
+	char	str2[] = "is";
+	char	str3[] = "mercy";
+	t_list	*all_list;
+	t_list	*new_list;
+
+	all_list = ft_lstnew(str1);
+	printf("all_list = ft_lstnew(%s) <\n", str1);
+	new_list = ft_lstnew(str2);
+	printf("new_list = ft_lstnew(%s) <\n", str2);
+	ft_lstadd_back(&all_list, new_list);
+	printf("ft_lstadd_back(&all_list, new_list) <\n");
+	new_list = ft_lstnew(str3);
+	printf("new_list = ft_lstnew(%s) <\n", str3);
+	ft_lstadd_back(&all_list, new_list);
+	printf("ft_lstadd_back(&all_list, new_list) <\n");
+	print_list(&all_list);
+
+	printf("%s\n", "########### END TESTE ft_lstclear");
+}
+
+void tst_ft_lstiter()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_lstiter");
+	char	str1[] = "Ruthless";
+	char	str2[] = "is";
+	char	str3[] = "mercy";
+	t_list	*all_list;
+	t_list	*new_list;
+
+	all_list = ft_lstnew(str1);
+	printf("all_list = ft_lstnew(%s) <\n", str1);
+	new_list = ft_lstnew(str2);
+	printf("new_list = ft_lstnew(%s) <\n", str2);
+	ft_lstadd_back(&all_list, new_list);
+	printf("ft_lstadd_back(&all_list, new_list) <\n");
+	new_list = ft_lstnew(str3);
+	printf("new_list = ft_lstnew(%s) <\n", str3);
+	ft_lstadd_back(&all_list, new_list);
+	printf("ft_lstadd_back(&all_list, new_list) <\n");
+	print_list(&all_list);
+
+	printf("%s\n", "########### END TESTE ft_lstiter");
+}
+
+void tst_ft_lstmap()
+{
+	printf("%s\n", "########### BEGIN TESTE ft_lstmap");
+	char	str1[] = "Ruthless";
+	char	str2[] = "is";
+	char	str3[] = "mercy";
+	t_list	*all_list;
+	t_list	*new_list;
+
+	all_list = ft_lstnew(str1);
+	printf("all_list = ft_lstnew(%s) <\n", str1);
+	new_list = ft_lstnew(str2);
+	printf("new_list = ft_lstnew(%s) <\n", str2);
+	ft_lstadd_back(&all_list, new_list);
+	printf("ft_lstadd_back(&all_list, new_list) <\n");
+	new_list = ft_lstnew(str3);
+	printf("new_list = ft_lstnew(%s) <\n", str3);
+	ft_lstadd_back(&all_list, new_list);
+	printf("ft_lstadd_back(&all_list, new_list) <\n");
+	print_list(&all_list);
+
+	printf("%s\n", "########### END TESTE ft_lstmap");
+}
+
 int main(void)
 {
+	// PART 1
 	// tst_ft_isalpha();
 	// tst_ft_isdigit();
 	// tst_ft_isalnum();
@@ -771,7 +965,7 @@ int main(void)
 	// tst_ft_memcmp();
 	// tst_ft_strrchr();
 	// tst_ft_strchr();
-	// tst_ft_strnstr();
+	tst_ft_strnstr();
 	// tst_ft_strncmp();
 	// tst_ft_strlcpy();
 	// tst_ft_strlcat();
@@ -781,6 +975,7 @@ int main(void)
 	// tst_ft_calloc();
 	// tst_ft_strdup();
 
+	// PART 2
 	// tst_ft_substr();
 	// tst_ft_strjoin();
 	// tst_ft_strtrim();
@@ -793,7 +988,16 @@ int main(void)
 	// tst_ft_strmapi();
 	// tst_ft_striteri();
 
-	tst_ft_lstnew();
+	// PART BONUS
+	// tst_ft_lstnew();
+	// tst_ft_lstadd_front();
+	// tst_ft_lstsize();
+	// tst_ft_lstadd_back();
+
+	// tst_ft_lstdelone();
+	// tst_ft_lstclear();
+	// tst_ft_lstiter();
+	// tst_ft_lstmap();
 
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 13:47:05 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/04/22 18:12:51 by vipinhei         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:26:17 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,27 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*mem_temp;
-	unsigned int	i;
+	char	*sub;
+	size_t	s_len;
 
-	mem_temp = malloc(len + 1);
-	if (!mem_temp)
+	if (s == NULL)
 		return (NULL);
-	i = 0;
-	while (i < len)
+	s_len = ft_strlen(s);
+	if (start >= s_len)
 	{
-		mem_temp[i] = s[i + start - 1];
-		i++;
+		sub = (char *) malloc(1);
+		if (sub == NULL)
+			return (NULL);
+		sub[0] = '\0';
+		return sub;
 	}
-	mem_temp[i] = '\0';
-	return (mem_temp);
+	s_len = s_len - start;
+	if (len < s_len)
+		s_len = len;
+	sub = (char *)malloc(s_len + 1);
+	if (sub == NULL)
+		return (NULL);
+	ft_memcpy(sub, &s[start], s_len);
+	sub[s_len] = '\0';
+	return (sub);
 }

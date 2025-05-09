@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vipinhei <vipinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 14:16:22 by vipinhei          #+#    #+#             */
-/*   Updated: 2025/05/08 16:52:09 by vipinhei         ###   ########.fr       */
+/*   Created: 2025/05/06 17:10:24 by vipinhei          #+#    #+#             */
+/*   Updated: 2025/05/08 17:06:42 by vipinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Fill memory with a constant byte
-void	*ft_memset(void *s, int c, size_t n)
+// Delete all content from the nodes and free the memmory
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	size_t	i;
-	char	*str;
+	t_list	*temp_list;
 
-	str = (char *)s;
-	i = 0;
-	while (i < n)
+	while (*lst != NULL)
 	{
-		str[i] = c;
-		i++;
+		temp_list = (*lst)->next;
+		ft_lstdelone((*lst), del);
+		*lst = temp_list;
 	}
-	return (str);
+	free(*lst);
 }
