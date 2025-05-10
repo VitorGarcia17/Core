@@ -14,29 +14,20 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	long	i;
-	char	digits[15];
+	long b;
 
-	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
-	else if (n == 0)
-		write(fd, "0", 1);
-	else
+	b = n;
+	if (b < 0)
 	{
-		i = 0;
-		if (n < 0)
-		{
-			n = n * -1;
-			ft_putchar_fd('-', fd);
-		}
-		while (n > 0)
-		{
-			digits[i++] = (n % 10) + '0';
-			n = n / 10;
-		}
-		while (i >= 0)
-		{
-			ft_putchar_fd(digits[i--], fd);
-		}
+		ft_putchar_fd('-', fd);
+		b = -b;
 	}
+	if (b > 9)
+	{
+		ft_putnbr_fd(b / 10, fd);
+		ft_putnbr_fd(b % 10, fd);
+	}
+	else
+		ft_putchar_fd(b + '0', fd);
 }
+

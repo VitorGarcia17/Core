@@ -65,3 +65,76 @@ char	**ft_split(char const *s, char c)
 	mem_arr[k] = NULL;
 	return (mem_arr);
 }
+
+
+
+
+#include <stdlib.h>
+
+static size_t   count_words(const char *s, char c)
+{
+    size_t  i;
+    size_t  count;
+
+    i = 0;
+    count = 0;
+    while (s[i])
+    {
+        if (s[i] != c && (i == 0 || s[i - 1] == c))
+            count++;
+        i++;
+    }
+    return (count);
+}
+
+static char *extract_word(const char *s, size_t start, size_t len)
+{
+    char    *word;
+    size_t  i;
+
+    word = malloc(len + 1);
+    if (!word)
+        return (NULL);
+    i = 0;
+    while (i < len)
+    {
+        word[i] = s[start + i];
+        i++;
+    }
+    word[len] = '\0';
+    return (word);
+}
+
+static void free_words(char **words, size_t count)
+{
+    while (count--)
+        free(words[count]);
+    free(words);
+}
+
+char    **ft_split(char const *s, char c)
+{
+    size_t  start;
+    size_t  end;
+    size_t  index;
+    char    **arr;
+
+    start = 0;
+    index = 0;
+    arr = malloc((count_words(s, c) + 1) * sizeof(char *));
+    if (!arr)
+        return (NULL);
+    while (s[start])
+    {
+        while (s[start] == c)
+            start++;
+        end = start;
+        while (s[end] && s[end] != c)
+            end++;
+        if (end > start && !(arr[index++] = extract_word(s, start, end - start)))
+            return (free_words(arr, index - 1), NULL);
+        start = end;
+    }
+    arr[index] = NULL;
+    return (arr);
+}

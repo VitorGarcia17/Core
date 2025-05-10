@@ -27,15 +27,14 @@ int	ft_atoi(const char *nptr)
 		i++;
 	if (nptr[i] == '-')
 	{
-		sinal = sinal * -1;
+		sinal = -sinal;
 		i++;
 	}
 	else if (nptr[i] == '+')
 		i++;
 	while (nptr[i] >= 48 && nptr[i] <= 57)
 	{
-		total = total * 10;
-		total = total + nptr[i] - 48;
+		total = (total * 10) + (nptr[i] - 48);
 		i++;
 	}
 	return (total * sinal);
